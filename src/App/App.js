@@ -20,6 +20,7 @@ class App extends Component {
   }
 
   addReservation(res) {
+    res.number = parseInt(res.number);
     const newReservations = [...this.state.reservations, res];
     this.setState({reservations: newReservations})
   }
