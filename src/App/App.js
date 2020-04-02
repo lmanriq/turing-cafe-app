@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import './App.css';
 import ReservationCard from '../ReservationCard/ReservationCard';
-import Form from '../Form/Form'
-
+import Form from '../Form/Form';
+import { fetchReservations, postReservation, sendDeleteReservation } from '../apiCalls'
 
 class App extends Component {
   constructor() {
@@ -13,34 +13,23 @@ class App extends Component {
   }
 
   componentDidMount() {
-    fetch('http://localhost:3001/api/v1/reservations')
-      .then(res => res.json())
+    fetchReservations()
       .then(data => this.setState({reservations: [...data]}))
       .catch(err => console.error(err.message))
   }
 
   addReservation(res) {
     res.number = parseInt(res.number);
-    fetch('http://localhost:3001/api/v1/reservations', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify(res)
-    })
-      .then(res => res.json())
+    postReservation(res)
       .then(data => this.setState({reservations: [...this.state.reservations, data]}))
       .catch(err => console.error(err.message))
   }
 
   deleteReservation(id) {
+    sendDeleteReservation(id)
+      .catch(err => console.error(err.message))
     const filteredReservations = this.state.reservations.filter(res => res.id !== id);
     this.setState({reservations: filteredReservations})
-    fetch(`http://localhost:3001/api/v1/reservations/${id}`, {
-      method: 'DELETE'
-    })
-      .then(res => res.json())
-      .catch(err => console.error(err.message))
   }
 
   render() {
