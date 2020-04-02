@@ -19,6 +19,12 @@ class Form extends Component {
   makeReservation() {
     const newReservation = {...this.state, id: Date.now()}
     this.props.addReservation(newReservation);
+    this.setState({
+      name: '', 
+      date: '', 
+      time: '',
+      number: ''
+    })
   }
 
   render() {
