@@ -19,6 +19,12 @@ class App extends Component {
       .catch(err => console.error(err.message))
   }
 
+  addReservation(res) {
+    console.log(this.state)
+    const newReservations = [...this.state.reservations, res];
+    this.setState({reservations: newReservations})
+  }
+
   render() {
     const reservationCards = this.state.reservations.map(reservation => {
       return (
@@ -34,7 +40,7 @@ class App extends Component {
         <h1 className='app-title'>Turing Cafe Reservations</h1>
         <div className='resy-form'>
           <Form
-          
+            addReservation={this.addReservation.bind(this)}
           />
         </div>
         <div className='resy-container'>
