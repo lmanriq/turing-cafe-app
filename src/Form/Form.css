@@ -1,0 +1,12 @@
+form {
+  display: flex;
+  justify-content: space-around;
+}
+
+label {
+  display: none;
+}
+
+input {
+  margin: 0em 2em 2em 2em;
+}
