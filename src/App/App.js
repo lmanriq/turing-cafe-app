@@ -30,6 +30,17 @@ class App extends Component {
     })
       .then(res => res.json())
       .then(data => this.setState({reservations: [...this.state.reservations, data]}))
+      .catch(err => console.error(err.message))
+  }
+
+  deleteReservation(id) {
+    const filteredReservations = this.state.reservations.filter(res => res.id !== id);
+    this.setState({reservations: filteredReservations})
+    fetch(`http://localhost:3001/api/v1/reservations/${id}`, {
+      method: 'DELETE'
+    })
+      .then(res => res.json())
+      .catch(err => console.error(err.message))
   }
 
   render() {
@@ -37,6 +48,7 @@ class App extends Component {
       return (
         <ReservationCard
           key={reservation.id}
+          deleteReservation={this.deleteReservation.bind(this)}
           {...reservation}
         />
       )
