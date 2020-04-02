@@ -77,4 +77,52 @@ describe('App', () => {
     const newCardName = await waitFor(() => getByText('Lili'));
     expect(newCardName).toBeInTheDocument();
   })
+
+  it('should be able to delete reservations', async () => {
+    fetchReservations.mockResolvedValueOnce([
+      {
+        "id": 1,
+        "name": "Christie",
+        "date": "12/29",
+        "time": "7:00",
+        "number": 12
+      },
+      {
+        "id": 2,
+        "name": "Leta",
+        "date": "4/5",
+        "time": "7:00",
+        "number": 2
+      },
+      {
+        "id": 3,
+        "name": "Pam",
+        "date": "1/21",
+        "time": "6:00",
+        "number": 4
+      }
+    ]);
+    sendDeleteReservation.mockResolvedValueOnce([
+      {
+        "id": 1,
+        "name": "Christie",
+        "date": "12/29",
+        "time": "7:00",
+        "number": 12
+      },
+      {
+        "id": 2,
+        "name": "Leta",
+        "date": "4/5",
+        "time": "7:00",
+        "number": 2
+      }
+    ]);
+    const { getByText, getByTestId } = render(
+      <App />
+    )
+    const pamCancelBtn = await waitFor(() => getByTestId('3'));
+    fireEvent.click(pamCancelBtn);
+    // await waitFor(() => expect(getByText('Pam')).not.toBeDefined());
+  })
 });

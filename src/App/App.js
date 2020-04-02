@@ -27,9 +27,10 @@ class App extends Component {
 
   deleteReservation(id) {
     sendDeleteReservation(id)
+      .then(data => this.setState({reservations: [...data]}))
       .catch(err => console.error(err.message))
-    const filteredReservations = this.state.reservations.filter(res => res.id !== id);
-    this.setState({reservations: filteredReservations})
+    // const filteredReservations = this.state.reservations.filter(res => res.id !== id);
+    // this.setState({reservations: filteredReservations})
   }
 
   render() {
