@@ -9,14 +9,14 @@ import './ReservationCard.css';
 // "number": 12
 // }
 
-const ReservationCard = ({ id, name, date, time, number }) => {
+const ReservationCard = ({ id, name, date, time, number, deleteReservation }) => {
   return (
-    <article className="resy-card">
+    <article className='resy-card'>
       <h2>{name}</h2>
       <p>{date}</p>
       <p>{time} PM</p>
       <p>Number of guests: {number}</p>
-      <button>cancel</button>
+      <button type='button' onClick={() => deleteReservation(id)}>cancel</button>
     </article>
   )
 }
