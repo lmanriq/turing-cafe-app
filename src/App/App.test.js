@@ -1,32 +1,80 @@
 import React from 'react';
-import ReactDOM from 'react-dom';
 import App from './App';
-import { render, fireEvent } from '@testing-library/react'
+import { render, fireEvent, waitFor } from '@testing-library/react'
 import '@testing-library/jest-dom'
+import { fetchReservations, postReservation, sendDeleteReservation } from '../apiCalls'
+jest.mock('../apiCalls')
 
 describe('App', () => {
-  it('should render what we expect', () => {
+  it('should render what we expect', async () => {
+    fetchReservations.mockResolvedValueOnce([
+      {
+        "id": 1,
+        "name": "Christie",
+        "date": "12/29",
+        "time": "7:00",
+        "number": 12
+      },
+      {
+        "id": 2,
+        "name": "Leta",
+        "date": "4/5",
+        "time": "7:00",
+        "number": 2
+      },
+      {
+        "id": 3,
+        "name": "Pam",
+        "date": "1/21",
+        "time": "6:00",
+        "number": 4
+      }
+    ]);
     const { getByText } = render(
       <App />
     )
     expect(getByText('Turing Cafe Reservations')).toBeInTheDocument();
+    const sampleCard = await waitFor(() => getByText('Christie'));
+    expect(sampleCard).toBeInTheDocument();
   });
 
   it('should be able to add reservations', async () => {
-    const { getByText, getByPlaceholderText } = render(
+    fetchReservations.mockResolvedValueOnce([
+      {
+        "id": 1,
+        "name": "Christie",
+        "date": "12/29",
+        "time": "7:00",
+        "number": 12
+      },
+      {
+        "id": 2,
+        "name": "Leta",
+        "date": "4/5",
+        "time": "7:00",
+        "number": 2
+      },
+      {
+        "id": 3,
+        "name": "Pam",
+        "date": "1/21",
+        "time": "6:00",
+        "number": 4
+      }
+    ]);
+    postReservation.mockResolvedValueOnce({
+      "id": 55,
+      "name": "Lili",
+      "date": "7/20",
+      "time": "4:30",
+      "number": 5
+    });
+    const { getByText } = render(
       <App />
     )
-    const nameInput = getByPlaceholderText('your name');
-    const dateInput = getByPlaceholderText('date');
-    const timeInput = getByPlaceholderText('time');
-    const numberInput = getByPlaceholderText('number of guests');
     const resBtn = getByText('Make Reservation');
-    fireEvent.change(nameInput, {target: {value: 'Lili'}});
-    fireEvent.change(dateInput, {target: {value: '7/20'}});
-    fireEvent.change(timeInput, {target: {value: '4:30'}});
-    fireEvent.change(numberInput, {target: {value: '5'}});
     fireEvent.click(resBtn);
-    const newCardName = await getByText('Lili');
+    const newCardName = await waitFor(() => getByText('Lili'));
     expect(newCardName).toBeInTheDocument();
   })
 });
