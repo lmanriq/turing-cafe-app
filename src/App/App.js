@@ -10,14 +10,6 @@ class App extends Component {
     }
   }
 
-//   {
-// "id": 1,
-// "name": "Christie",
-// "date": "12/29",
-// "time": "7:00",
-// "number": 12
-// }
-
   componentDidMount() {
     fetch('http://localhost:3001/api/v1/reservations')
       .then(res => res.json())
@@ -29,6 +21,8 @@ class App extends Component {
     const reservationCards = this.state.reservations.map(reservation => {
       return (
         <ReservationCard
+          key={reservation.id}
+          {...reservation}
         />
       )
     })
