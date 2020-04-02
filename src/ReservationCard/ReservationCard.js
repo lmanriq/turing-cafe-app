@@ -1,14 +1,6 @@
 import React from 'react';
 import './ReservationCard.css';
 
-//   {
-// "id": 1,
-// "name": "Christie",
-// "date": "12/29",
-// "time": "7:00",
-// "number": 12
-// }
-
 const ReservationCard = ({ id, name, date, time, number, deleteReservation }) => {
   return (
     <article className='resy-card'>
@@ -16,7 +8,7 @@ const ReservationCard = ({ id, name, date, time, number, deleteReservation }) =>
       <p>{date}</p>
       <p>{time} PM</p>
       <p>Number of guests: {number}</p>
-      <button type='button' onClick={() => deleteReservation(id)}>cancel</button>
+      <button data-testid={id} type='button' onClick={() => deleteReservation(id)}>cancel</button>
     </article>
   )
 }
