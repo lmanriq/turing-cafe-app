@@ -20,7 +20,6 @@ class App extends Component {
   }
 
   addReservation(res) {
-    console.log(this.state)
     const newReservations = [...this.state.reservations, res];
     this.setState({reservations: newReservations})
   }
