@@ -10,3 +10,8 @@ label {
 input {
   margin: 0em 2em 2em 2em;
 }
+
+input, 
+form button {
+  height: 100%;
+}
