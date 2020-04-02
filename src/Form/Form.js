@@ -5,24 +5,29 @@ class Form extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      name: null, 
-      date: null, 
-      time: null,
-      number: null
+      name: '', 
+      date: '', 
+      time: '',
+      number: ''
     }
+  }
+
+  updateState(e) {
+    this.setState({[e.target.id]: e.target.value})
   }
 
   render() {
     return(
       <form>
-        <label for='name'>Name:</label>
-        <input type='text' id='name' placeholder='your name' value={this.state.name} />
-        <label for='date'>Date:</label>
-        <input type='text' id='date' placeholder='date' value={this.state.date} />
-        <label for='time'>Time:</label>
-        <input type='text' id='time' placeholder='time' value={this.state.time} />
-        <label for='number'>Number of guests:</label>
-        <input type='text' id='number' placeholder='number of guests' value={this.state.number} />
+        <label htmlFor='name'>Name:</label>
+        <input type='text' id='name' placeholder='your name' value={this.state.name} onChange={(e) => this.updateState(e)} />
+        <label htmlFor='date'>Date:</label>
+        <input type='text' id='date' placeholder='date' value={this.state.date} onChange={(e) => this.updateState(e)} />
+        <label htmlFor='time'>Time:</label>
+        <input type='text' id='time' placeholder='time' value={this.state.time} onChange={(e) => this.updateState(e)} />
+        <label htmlFor='number'>Number of guests:</label>
+        <input type='text' id='number' placeholder='number of guests' value={this.state.number} onChange={(e) => this.updateState(e)} />
+        <button type='button'>Make Reservation</button>
       </form>
     )
   }
