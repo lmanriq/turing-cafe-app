@@ -11,11 +11,12 @@ import './ReservationCard.css';
 
 const ReservationCard = ({ id, name, date, time, number }) => {
   return (
-    <article>
+    <article className="resy-card">
       <h2>{name}</h2>
       <p>{date}</p>
-      <p>{time}</p>
-      <p>{number}</p>
+      <p>{time} PM</p>
+      <p>Number of guests: {number}</p>
+      <button>cancel</button>
     </article>
   )
 }

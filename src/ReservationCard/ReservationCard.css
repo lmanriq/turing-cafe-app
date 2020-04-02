@@ -1,0 +1,15 @@
+.resy-card {
+  border: 1px solid teal;
+  background-color: whitesmoke;
+  color: teal;
+  width: 12em;
+  height: 13em;
+  margin: 0.5em;
+}
+
+.resy-card button {
+  background-color: teal;
+  width: 70%;
+  border: none; 
+  color: white;
+}
