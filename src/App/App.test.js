@@ -118,11 +118,11 @@ describe('App', () => {
         "number": 2
       }
     ]);
-    const { getByText, getByTestId } = render(
+    const { getByTestId } = render(
       <App />
     )
     const pamCancelBtn = await waitFor(() => getByTestId('3'));
     fireEvent.click(pamCancelBtn);
-    // await waitFor(() => expect(getByText('Pam')).not.toBeDefined());
+    // await waitFor(() => expect(pamCancelBtn.not.toBeDefined()));
   })
 });
